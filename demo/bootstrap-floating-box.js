@@ -1,0 +1,17 @@
+/*!
+ * Responsive Bootstrap Toolkit
+ * Author:    Maciej Gurban
+ * License:   MIT
+ * Version:   2.6.3 (2016-06-21)
+ * Origin:    https://github.com/maciej-gurban/responsive-bootstrap-toolkit
+ */
+var ResponsiveBootstrapToolkit=function(i){var e={detectionDivs:{bootstrap:{xs:i('<div class="device-xs visible-xs visible-xs-block"></div>'),sm:i('<div class="device-sm visible-sm visible-sm-block"></div>'),md:i('<div class="device-md visible-md visible-md-block"></div>'),lg:i('<div class="device-lg visible-lg visible-lg-block"></div>')},foundation:{small:i('<div class="device-xs show-for-small-only"></div>'),medium:i('<div class="device-sm show-for-medium-only"></div>'),large:i('<div class="device-md show-for-large-only"></div>'),xlarge:i('<div class="device-lg show-for-xlarge-only"></div>')}},applyDetectionDivs:function(){i(document).ready(function(){i.each(o.breakpoints,function(i){o.breakpoints[i].appendTo(".responsive-bootstrap-toolkit")})})},isAnExpression:function(i){return"<"==i.charAt(0)||">"==i.charAt(0)},splitExpression:function(i){var e=i.charAt(0),o="="==i.charAt(1),s=1+(o?1:0),n=i.slice(s);return{operator:e,orEqual:o,breakpointName:n}},isAnyActive:function(e){var s=!1;return i.each(e,function(i,e){return o.breakpoints[e].is(":visible")?(s=!0,!1):void 0}),s},isMatchingExpression:function(i){var s=e.splitExpression(i),n=Object.keys(o.breakpoints),r=n.indexOf(s.breakpointName);if(-1!==r){var t=0,a=0;"<"==s.operator&&(t=0,a=s.orEqual?++r:r),">"==s.operator&&(t=s.orEqual?r:++r,a=void 0);var l=n.slice(t,a);return e.isAnyActive(l)}}},o={interval:300,framework:null,breakpoints:null,is:function(i){return e.isAnExpression(i)?e.isMatchingExpression(i):o.breakpoints[i]&&o.breakpoints[i].is(":visible")},use:function(i,s){o.framework=i.toLowerCase(),"bootstrap"===o.framework||"foundation"===o.framework?o.breakpoints=e.detectionDivs[o.framework]:o.breakpoints=s,e.applyDetectionDivs()},current:function(){var e="unrecognized";return i.each(o.breakpoints,function(i){o.is(i)&&(e=i)}),e},changed:function(i,e){var s;return function(){clearTimeout(s),s=setTimeout(function(){i()},e||o.interval)}}};return i(document).ready(function(){i('<div class="responsive-bootstrap-toolkit"></div>').appendTo("body")}),null===o.framework&&o.use("bootstrap"),o}(jQuery);"undefined"!=typeof module&&module.exports&&(module.exports=ResponsiveBootstrapToolkit);
+
+
+/*!
+ * Responsive Floating Box Bootstrap Toolkit
+ * Author:    Mojtaba Asadollahzade
+ * License:   GNU
+ * Version:   1.0.0 (2017-08-17)
+ */
+!function(o,n,s,l){o.fn.FloatingBox=function(c){var m=o.extend({selector:".item",xs:12,sm:12,md:4,lg:4,xlg:6,margin:20},c),t=o(this),i=t.find(m.selector);o(n).ready(function(){var n=l.current();cloumns=m.lg,"xs"==n?cloumns=m.xs:"sm"==n?cloumns=m.sm:"md"==n?cloumns=m.md:"lg"==n?cloumns=m.lg:"xlg"==n&&(cloumns=m.xlg);for(var s="",c=1;c<=cloumns;c++)s=s+'<div class="col-xs-'+Math.ceil(12/cloumns)+" __floatingbox-"+c+'"></div>';t.html(s);var a=1;i.each(function(){o(".__floatingbox-"+a).append(o(this)),o(this).css("margin-bottom",m.margin+"px"),a<cloumns?a+=1:a=1})}),o(s).resize(l.changed(function(){var n=l.current();"xs"==n?cloumns=m.xs:"sm"==n?cloumns=m.sm:"md"==n?cloumns=m.md:"lg"==n?cloumns=m.lg:"xlg"==n&&(cloumns=m.xlg);for(var s="",c=1;c<=cloumns;c++)s=s+'<div class="col-xs-'+Math.ceil(12/cloumns)+" __floatingbox-"+c+'"></div>';t.html(""),t.html(s);var a=1;i.each(function(){o(".__floatingbox-"+a).append(o(this)),o(this).css("margin-bottom",m.margin+"px"),a<cloumns?a+=1:a=1})}))}}(jQuery,document,window,ResponsiveBootstrapToolkit);
